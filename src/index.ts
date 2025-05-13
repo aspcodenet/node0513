@@ -1,6 +1,8 @@
 import path from "path";
 import * as fs from "fs";
 import {parse} from "csv-parse"
+import { getProductId, updateProductDescription } from "./database/database";
+import { exit } from "process";
 
 console.log("Nu körs programmet")
 type ProductData = {
@@ -20,7 +22,22 @@ parse(fileContent, {
     delimiter: ',',
     columns: headers,
   }, async (error, result: ProductData[]) => {
-    console.log(result[0])
+    for(const product of result){
+        // kolla finns i databasen?
+        if(product.ProductName === "ProductName"){
+            continue
+        }
+        const prodId = await getProductId(product.ProductName)
+        if(prodId === undefined){
+            console.log(`Produkten ${product.ProductName} finns inte i vår databas`)
+            continue;
+        }
+        // om så - uppdatera
+        const produktensId = prodId.id
+        updateProductDescription(produktensId,product.Description, product.Color) 
+    }
+    //console.log(result[1].ProductName)
+    exit();
     }
 );
 

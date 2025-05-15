@@ -4,6 +4,25 @@ import {parse} from "csv-parse"
 import { getProductId, updateProductDescription } from "./database/database";
 import { exit } from "process";
 
+
+
+import { createBucketClient } from '@cosmicjs/sdk'
+const cosmic = createBucketClient({
+  bucketSlug: 'my-project-production-74aeaa30-2cfc-11f0-9ca8-cf720a88b3b0',
+  readKey: '3FJzEHvtNMEworphl5XnNGzdzw6evjPTsiyp5SPhG3ctKNaPF8'
+})
+
+
+
+let aa = await cosmic.objects.find({"type": "categories"})
+.limit(100)
+.depth(1)
+
+
+
+
+
+
 console.log("Nu körs programmet")
 type ProductData = {
     ProductName: string,
@@ -34,7 +53,7 @@ parse(fileContent, {
         }
         // om så - uppdatera
         const produktensId = prodId.id
-        updateProductDescription(produktensId,product.Description, product.Color) 
+        await updateProductDescription(produktensId,product.Description, product.Color) 
     }
     //console.log(result[1].ProductName)
     exit();

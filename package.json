@@ -1,6 +1,7 @@
 {
+  "type":"module",
   "scripts": {
-    "dev": "npx esrun ./src/index.ts"
+    "dev": "npx tsx ./src/index.ts"
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.5.2",

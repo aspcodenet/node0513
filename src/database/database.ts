@@ -13,7 +13,7 @@ export interface CategoryId extends RowDataPacket {
 export async function getCategoryIdFromDatabase(pimid:string) : Promise<CategoryId|undefined>{
     const conn = await connection;
     
-    const [rows] = await conn.query<CategoryId[]>("SELECT id from category where pimid=?", [pimid])
+    const [rows] = await conn.query<CategoryId[]>("SELECT id from Category where pimid=?", [pimid])
     if (rows.length == 0){
         return undefined
     }
@@ -25,7 +25,7 @@ export async function insertCategory(title:string, description:string, pimid:str
     // vi hjar ju skapat en koklumn i Products spom heter description2
     // också en som heter color2
     const conn = await connection;
-    await conn.execute("INSERT INTO category(description,name,pimid) VALUES(?,?,?)",[description,title,pimid])
+    await conn.execute("INSERT INTO Category(description,name,pimid) VALUES(?,?,?)",[description,title,pimid])
 
 }
 
@@ -34,7 +34,7 @@ export async function updateCategory(id:number, title:string, description:string
     // vi hjar ju skapat en koklumn i Products spom heter description2
     // också en som heter color2
     const conn = await connection;
-    await conn.execute("UPDATE category SET description=?, name=? WHERE id=?",[description,title,id])
+    await conn.execute("UPDATE Category SET description=?, name=? WHERE id=?",[description,title,id])
 
 }
 

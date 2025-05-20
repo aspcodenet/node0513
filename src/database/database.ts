@@ -25,7 +25,7 @@ export async function insertCategory(title:string, description:string, pimid:str
     // vi hjar ju skapat en koklumn i Products spom heter description2
     // också en som heter color2
     const conn = await connection;
-    await conn.execute("INSERT INTO Category(description,name,pimid) VALUES(?,?,?,?)",[description,title,pimid,active])
+    await conn.execute("INSERT INTO Category(description,name,pimid,active) VALUES(?,?,?,?)",[description,title,pimid,active])
 
 }
 

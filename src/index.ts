@@ -43,11 +43,11 @@ for(const pimCatgory of response.objects){
   console.log(categoryIdInDatabase)
   if(categoryIdInDatabase === undefined)  {
     // INSERT
-    await  insertCategory(pimCatgory.title,pimCatgory.metadata.description, pimCatgory.id)
+    await  insertCategory(pimCatgory.title,pimCatgory.metadata.description, pimCatgory.id, pimCatgory.metadata.active)
     
   }else{
     // UPDATE category .... WHERE id=categoryIdInDatabase
-    await  updateCategory(  categoryIdInDatabase.id, pimCatgory.title,pimCatgory.metadata.description)
+    await  updateCategory(  categoryIdInDatabase.id, pimCatgory.title,pimCatgory.metadata.description,pimCatgory.metadata.active)
   }
 
 

@@ -21,20 +21,20 @@ export async function getCategoryIdFromDatabase(pimid:string) : Promise<Category
 }
 
 
-export async function insertCategory(title:string, description:string, pimid:string){
+export async function insertCategory(title:string, description:string, pimid:string,active:boolean){
     // vi hjar ju skapat en koklumn i Products spom heter description2
     // också en som heter color2
     const conn = await connection;
-    await conn.execute("INSERT INTO Category(description,name,pimid) VALUES(?,?,?)",[description,title,pimid])
+    await conn.execute("INSERT INTO Category(description,name,pimid) VALUES(?,?,?,?)",[description,title,pimid,active])
 
 }
 
 
-export async function updateCategory(id:number, title:string, description:string){
+export async function updateCategory(id:number, title:string, description:string,active:boolean){
     // vi hjar ju skapat en koklumn i Products spom heter description2
     // också en som heter color2
     const conn = await connection;
-    await conn.execute("UPDATE Category SET description=?, name=? WHERE id=?",[description,title,id])
+    await conn.execute("UPDATE Category SET description=?, name=?, active=? WHERE id=?",[description,title,active,id])
 
 }
 
